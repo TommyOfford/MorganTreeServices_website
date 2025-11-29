@@ -1,15 +1,11 @@
-/* ==========================================================================
+/* 
    File: style.css
-   Author: Your Name
+   Author: Thomas Morgan Offord
    Created: 2025-10-28
    Description: Stylesheet for Morgan Tree Services single-page website.
-                Includes reset, typography, hero, sections, gallery, contact,
-                footer, and responsive design.
-   ========================================================================== */
+*/
 
-/* ==========================================================================
-   Reset & Base Styles
-   ========================================================================== */
+/* Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -23,9 +19,7 @@ body {
     background-color: #f7f7f7;
 }
 
-/* ==========================================================================
-   Containers
-   ========================================================================== */
+/* Containers */
 .container {
     width: 90%;
     max-width: 1000px;
@@ -34,9 +28,7 @@ body {
     padding: 2rem 0;
 }
 
-/* ==========================================================================
-   Hero Section
-   ========================================================================== */
+/* Hero Section */
 .hero {
     background: url('images/hero-tree.jpg') center/cover no-repeat;
     color: white;
@@ -68,9 +60,7 @@ body {
     background: #1a661a;
 }
 
-/* ==========================================================================
-   Sections (About, Services, Gallery, Contact)
-   ========================================================================== */
+/* Sections (About, Services, Gallery, Contact) */
 .section {
     background: white;
     margin: 1rem 0;
@@ -84,9 +74,7 @@ body {
     background: #eef6ee;
 }
 
-/* ==========================================================================
-   Services Section
-   ========================================================================== */
+/* Services Section */
 .service-list {
     list-style: none;
     padding: 1rem 0;
@@ -97,9 +85,7 @@ body {
     margin: 0.5rem 0;
 }
 
-/* ==========================================================================
-   Gallery Section
-   ========================================================================== */
+/* Gallery Section */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -118,9 +104,29 @@ body {
     transform: scale(1.03);
 }
 
-/* ==========================================================================
-   Contact Section
-   ========================================================================== */
+/* Testimonials */
+.testimonials {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.testimonial {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    font-style: italic;
+}
+
+.testimonial h4 {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #228b22;
+}
+
+
+/* Contact Section */
 #contact a {
     color: #228b22;
     text-decoration: none;
@@ -130,9 +136,7 @@ body {
     text-decoration: underline;
 }
 
-/* ==========================================================================
-   Footer
-   ========================================================================== */
+/* Footer */
 footer {
     background: #333;
     color: white;
@@ -141,9 +145,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* ==========================================================================
-   Responsive Design
-   ========================================================================== */
+/* Responsive Design */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
