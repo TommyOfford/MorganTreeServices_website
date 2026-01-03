@@ -31,7 +31,7 @@ h3,
 h4 {
     font-family: 'Cinzel', serif;
     letter-spacing: 1px;
-    color: var(--brand-green)
+    color: var(--brand-green);
 }
 
 /* Containers */
@@ -117,16 +117,11 @@ h4 {
 
     .hero-text {
         position: static;
-        /* remove absolute positioning */
         transform: none;
-        /* remove centering transform */
         text-align: center;
         flex: none;
-        /* remove flex-grow */
-        max-width: none;
-        /* allow full width */
+        max-width: 1200px;
         width: auto;
-        /* take natural width */
     }
 
     .hero h1 {
@@ -138,7 +133,6 @@ h4 {
     }
 }
 
-
 /* Sections (About, Services, Gallery, Contact) */
 .section {
     background: transparent;
@@ -146,6 +140,45 @@ h4 {
     padding: 1rem 1rem;
     border-radius: 0px;
     box-shadow: none;
+}
+
+/* About Section */
+#about {
+    padding: 3rem 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+#about h2 {
+    font-size: 2.5rem;
+    /* moderate heading size */
+    margin-bottom: 1rem;
+    color: var(--brand-green);
+}
+
+#about p {
+    font-size: 1.4rem;
+    /* moderate paragraph text */
+    color: #ffffff;
+    line-height: 1.6;
+    margin: 0 auto 1rem;
+}
+
+/* Desktop adjustments */
+@media (min-width: 900px) {
+    #about h2 {
+        font-size: 2.8rem;
+        /* larger on desktop but not huge */
+    }
+
+    #about p {
+        font-size: 1.5rem;
+        /* readable but not overwhelming */
+        max-width: 100%;
+        /* span full width */
+        margin: 0 2rem 1rem;
+        /* optional padding from edges */
+    }
 }
 
 /* Services Grid */
@@ -184,10 +217,6 @@ h4 {
     font-weight: bold;
 }
 
-.service-text {
-    color: #ffffff;
-}
-
 /* Service Detail View */
 .service-detail {
     margin-top: 2rem;
@@ -205,6 +234,12 @@ h4 {
     opacity: 0;
 }
 
+.service-panel span {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: var(#ffffff);
+}
 
 .service-detail-content {
     display: flex;
@@ -221,6 +256,7 @@ h4 {
 }
 
 .service-text {
+    color: #ffffff;
     width: 50%;
     text-align: left;
     max-width: 400px;
