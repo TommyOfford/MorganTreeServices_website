@@ -2,10 +2,14 @@
    File: script.js
    Author: Thomas Morgan Offord
    Updated: 2026-01-02
-   Description: Handles interactive services section for Morgan Tree Services.
+   Description: Handles interactive services section and gallery lightbox
+   for Morgan Tree Services.
 */
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    /* SERVICES SECTION */
+
     const services = {
         reduction: {
             title: "Reduction / Pruning",
@@ -49,12 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
             detailImage.src = service.image;
             detailImage.alt = service.title;
 
-            // Show detail with fade-in
             grid.style.display = "none";
             detail.classList.remove("hidden");
             detail.setAttribute("aria-hidden", "false");
 
-            // Accessibility
             panel.setAttribute("aria-expanded", "true");
         });
     });
@@ -64,4 +66,34 @@ document.addEventListener("DOMContentLoaded", () => {
         grid.style.display = "grid";
         detail.setAttribute("aria-hidden", "true");
     });
+
+
+    /* GALLERY LIGHTBOX */
+
+    const galleryImages = document.querySelectorAll(".gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    if (lightbox && lightboxImg) {
+        galleryImages.forEach(img => {
+            img.addEventListener("click", () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.remove("hidden");
+            });
+        });
+
+        lightbox.addEventListener("click", () => {
+            lightbox.classList.add("hidden");
+            lightboxImg.src = "";
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                lightbox.classList.add("hidden");
+                lightboxImg.src = "";
+            }
+        });
+    }
+
 });
