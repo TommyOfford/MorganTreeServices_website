@@ -2,42 +2,29 @@
    File: style.css
    Author: Thomas Morgan Offord
    Updated: 2026-01-02
-   Description:
-   Responsive and interactive stylesheet for Morgan's Tree Service website.
-   Designed for accessibility, mobile-first responsiveness, and clean UX.
+   Description: Responsive and interactive stylesheet for Morgan Tree Services.
 */
 
-/* =========================
-   CSS VARIABLES (THEME)
-   ========================= */
 :root {
     --brand-green: #4a8c45;
 }
 
-/* =========================
-   GLOBAL RESET
-   ========================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* =========================
-   BASE DOCUMENT STYLES
-   ========================= */
 body {
     font-family: 'Open Sans', Arial, sans-serif;
     line-height: 1.6;
     color: #ffffff;
     background-color: #000;
-    overflow-x: hidden;
-    /* Prevent mobile horizontal overflow */
+
 }
 
-/* =========================
-   HEADINGS
-   ========================= */
+
 h1,
 h2,
 h3,
@@ -47,9 +34,7 @@ h4 {
     color: var(--brand-green);
 }
 
-/* =========================
-   LAYOUT CONTAINER
-   ========================= */
+/* Containers */
 .container {
     width: 90%;
     max-width: 1000px;
@@ -58,121 +43,111 @@ h4 {
     padding: 2rem 0;
 }
 
-/* =========================
-   HERO SECTION (MOBILE FIRST)
-   ========================= */
+/* Hero Mobile */
 .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    padding: 1rem;
-    min-height: auto;
-    /* Allow natural height on mobile */
+    padding: 1rem 1rem;
+    min-height: 60vh;
     text-align: center;
 }
 
-/* Logo displayed prominently in hero */
+/* Logo */
 .hero-logo {
     width: auto;
-    height: auto;
-    max-height: 220px;
-    max-width: 90vw;
+    height: 300px;
     margin-bottom: 1rem;
 }
 
-/* Wrapper for hero text content */
+/* Text */
 .hero-text {
     max-width: 600px;
 }
 
-/* Main site title */
 .hero h1 {
-    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    font-size: 2.4rem;
     margin-bottom: 0.75rem;
-    white-space: normal;
-    /* Allow wrapping on mobile */
 }
 
-/* Hero subtitle */
 .hero p {
-    font-size: clamp(1rem, 4.5vw, 1.2rem);
+    font-size: 1.2rem;
     margin-bottom: 1.5rem;
 }
 
-/* =========================
-   CALL-TO-ACTION BUTTONS
-   ========================= */
 .cta-buttons {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     gap: 1.5rem;
     margin-top: 1rem;
-    width: 100%;
-    align-items: stretch;
 }
 
-/* Primary call & email buttons */
+/* Call Button */
 .call-button {
     background: #275f24;
     color: white;
-    padding: 0.9rem 1.5rem;
+    padding: 1rem 2rem;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    font-size: clamp(1.2rem, 6vw, 2rem);
+    font-size: 2rem;
+    transition: background 0.3s ease;
     display: inline-block;
-    max-width: 100%;
-    text-align: center;
-    word-wrap: break-word;
-
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effect for emphasis */
 .call-button:hover {
     background: #1a661a;
     transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Click feedback */
 .call-button:active {
     transform: scale(0.98);
 }
 
-/* Keyboard accessibility focus */
 .call-button:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 4px;
 }
 
-/* =========================
-   HERO – DESKTOP ENHANCEMENTS
-   ========================= */
+/* Responsive Adjustments */
 @media (min-width: 900px) {
     .hero {
+        flex-direction: column;
+        /* stack logo above text */
+        align-items: center;
+        /* center horizontally */
+        justify-content: center;
+        /* center vertically */
+        padding: 1rem 1rem;
         min-height: 70vh;
+        /* taller hero */
+        position: relative;
     }
 
     .hero-logo {
         height: 550px;
-        max-height: none;
-        max-width: none;
+        margin-bottom: 0;
     }
 
     .hero-text {
         width: 100%;
+        max-width: none;
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
     }
 
     .hero h1 {
         font-size: clamp(4.5rem, 9vw, 8rem);
         white-space: nowrap;
         line-height: 1.05;
+        margin: 0 auto;
     }
 
     .hero p {
@@ -180,47 +155,55 @@ h4 {
     }
 }
 
-/* =========================
-   GENERIC SECTION STYLES
-   ========================= */
+/* Sections (About, Services, Gallery, Contact) */
 .section {
     background: transparent;
-    padding: 1rem;
+    margin: 0;
+    padding: 1rem 1rem;
+    border-radius: 0px;
+    box-shadow: none;
 }
 
-/* =========================
-   ABOUT SECTION
-   ========================= */
+/* About Section */
 #about {
     padding: 3rem 1rem;
+    text-align: center;
+    width: 100%;
 }
 
 #about h2 {
     font-size: 2.5rem;
+    /* moderate heading size */
     margin-bottom: 1rem;
+    color: var(--brand-green);
 }
 
 #about p {
     font-size: 1.4rem;
+    /* moderate paragraph text */
+    color: #ffffff;
     line-height: 1.6;
-    margin-bottom: 1rem;
+    margin: 0 auto 1rem;
 }
 
-/* Desktop refinement */
+/* Desktop adjustments */
 @media (min-width: 900px) {
     #about h2 {
         font-size: 2.8rem;
+        /* larger on desktop but not huge */
     }
 
     #about p {
         font-size: 1.5rem;
+        /* readable but not overwhelming */
+        max-width: 100%;
+        /* span full width */
         margin: 0 2rem 1rem;
+        /* optional padding from edges */
     }
 }
 
-/* =========================
-   SERVICES GRID
-   ========================= */
+/* Services Grid */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -228,7 +211,7 @@ h4 {
     justify-items: center;
 }
 
-/* Individual service card */
+/* Individual Service Panel */
 .service-panel {
     background: none;
     border: none;
@@ -238,116 +221,115 @@ h4 {
     max-width: 200px;
 }
 
-/* Service preview image */
 .service-panel img {
     width: 100%;
     height: 140px;
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
-/* Subtle zoom on hover */
 .service-panel img:hover {
     transform: scale(1.03);
 }
 
-/* Service title */
 .service-panel span {
     display: block;
     margin-top: 0.5rem;
     font-weight: bold;
-    color: #ffffff;
 }
 
-/* =========================
-   SERVICE DETAIL VIEW
-   ========================= */
+/* Service Detail View */
 .service-detail {
     margin-top: 2rem;
     display: flex;
     gap: 2rem;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    opacity: 1;
     transition: opacity 0.3s ease;
 }
 
-/* Hidden state controlled by JS */
 .service-detail.hidden {
     display: none;
     opacity: 0;
 }
 
-/* Detail layout */
+.service-panel span {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: var(#ffffff);
+}
+
 .service-detail-content {
     display: flex;
     gap: 2rem;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
-/* Detail image */
 .service-detail-content img {
     width: 50%;
-    max-width: 400px;
     border-radius: 10px;
-}
-
-/* Detail text */
-.service-text {
-    width: 50%;
     max-width: 400px;
-    text-align: left;
 }
 
-/* Back navigation button */
+.service-text {
+    color: #ffffff;
+    width: 50%;
+    text-align: left;
+    max-width: 400px;
+}
+
 .back-button {
     background: none;
     border: none;
     color: var(--brand-green);
     font-weight: bold;
     cursor: pointer;
+    margin-bottom: 1rem;
 }
 
-/* =========================
-   GALLERY
-   ========================= */
+/* Gallery Section */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
 }
 
-/* Gallery images */
 .gallery img {
     width: 100%;
     height: 260px;
     object-fit: cover;
     border-radius: 10px;
-    cursor: zoom-in;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
+    cursor: zoom-in;
 }
 
-/* Hover zoom */
 .gallery img:hover {
     transform: scale(1.03);
 }
 
-/* Caption text */
 .gallery figcaption {
     margin-top: 0.5rem;
+    text-align: center;
     font-size: 0.95rem;
+    color: #ffffff;
 }
 
-/* Wider gallery on desktop */
+
 @media (min-width: 900px) {
     #gallery .container {
         max-width: 1400px;
     }
 }
 
-/* =========================
-   LIGHTBOX
-   ========================= */
+/* Fullscreen background */
 .lightbox {
     position: fixed;
     inset: 0;
@@ -358,26 +340,30 @@ h4 {
     z-index: 1000;
 }
 
-/* Hidden state */
+/* Only hide/show */
 .lightbox.hidden {
     display: none;
 }
 
-/* Wrapper to keep image centred */
+/* Centered image wrapper */
 .lightbox-content {
     display: inline-flex;
+    /* shrink to image */
+    align-items: center;
+    justify-content: center;
 }
 
-/* Lightbox image */
+/* Image itself */
 .lightbox img {
     width: 80vw;
     height: auto;
     object-fit: contain;
+    /* preserve aspect ratio */
     border-radius: 10px;
+    cursor: zoom-in;
     transition: transform 0.2s ease;
 }
 
-/* Drag cursor states */
 .lightbox img.zoomed {
     cursor: grab;
 }
@@ -387,24 +373,34 @@ h4 {
     transition: none;
 }
 
-/* =========================
-   TESTIMONIALS
-   ========================= */
+/* Testimonials */
 .testimonial-group {
     margin-top: 2rem;
     text-align: left;
 }
 
+.testimonial-group h3 {
+    margin-bottom: 1rem;
+    color: var(--brand-green);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 1px;
+}
+
 .testimonial {
     background: #111;
+    color: #ffffff;
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 255, 102, 0.15);
 }
 
-/* =========================
-   CONTACT
-   ========================= */
+.testimonial h4 {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: var(--brand-green);
+}
+
+/* Contact Section */
 #contact a {
     color: var(--brand-green);
     text-decoration: none;
@@ -414,21 +410,35 @@ h4 {
     text-decoration: underline;
 }
 
-/* =========================
-   FOOTER
-   ========================= */
+/* Footer */
 footer {
+    background: #000;
     border-top: 1px solid rgba(74, 140, 69, 0.3);
+    color: white;
+    text-align: center;
     padding: 1rem;
     font-size: 0.9rem;
 }
 
-/* =========================
-   MOBILE ADJUSTMENTS
-   ========================= */
+/* Responsive Design */
 @media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .call-button {
+        display: inline-block;
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+
     .service-detail-content {
         flex-direction: column;
+        gap: 1rem;
     }
 
     .service-detail-content img,
@@ -437,13 +447,20 @@ footer {
     }
 }
 
-/* =========================
-   PRINT STYLES
-   ========================= */
+/* Extra small screens */
+@media (max-width: 480px) {
+    .call-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Print Styles */
 @media print {
     body {
         background: white;
         color: black;
+        font-size: 12pt;
     }
 
     .hero,
@@ -452,7 +469,22 @@ footer {
         display: none;
     }
 
-    a[href^="tel:"]::after,
+    .section {
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 1rem 0;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    a[href^="tel:"]::after {
+        content: " (" attr(href) ")";
+    }
+
     a[href^="mailto:"]::after {
         content: " (" attr(href) ")";
     }
