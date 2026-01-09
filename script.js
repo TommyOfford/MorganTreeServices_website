@@ -11,57 +11,79 @@ document.addEventListener("DOMContentLoaded", () => {
     const services = {
         reduction: {
             title: "Reduction / Pruning",
-            image: "images/tree1.jpg",
             description: "Careful pruning and crown reduction to maintain tree health, safety, and appearance."
         },
         removal: {
             title: "Tree Removals",
-            image: "images/removal.jpg",
             description: "Safe and controlled removal of trees, including difficult or restricted-access locations."
         },
         lifting: {
             title: "Crown Lifting",
-            image: "images/lift.jpg",
             description: "Raising the canopy to improve access, light, and clearance around property."
         },
         hedges: {
             title: "Hedge Trimming",
-            image: "images/hedge.jpg",
             description: "Regular and one-off hedge maintenance to keep gardens tidy and healthy."
         },
         clearance: {
             title: "Garden Clearance",
-            image: "images/clearance.jpg",
             description: "Full garden and site clearance, including green waste removal."
         }
     };
 
-    const grid = document.getElementById("servicesGrid");
-    const detail = document.getElementById("serviceDetail");
-    const detailTitle = document.getElementById("detailTitle");
-    const detailDescription = document.getElementById("detailDescription");
-    const detailImage = document.getElementById("detailImage");
+    const panels = document.querySelectorAll(".service-panel-wrapper");
 
-    document.querySelectorAll(".service-panel").forEach(panel => {
+    panels.forEach(panelWrapper => {
+        const panel = panelWrapper.querySelector(".service-panel");
+
         panel.addEventListener("click", () => {
-            const service = services[panel.dataset.service];
-            detailTitle.textContent = service.title;
-            detailDescription.textContent = service.description;
-            detailImage.src = service.image;
-            detailImage.alt = service.title;
+            const isExpanded = panelWrapper.classList.contains("expanded");
 
-            grid.style.display = "none";
-            detail.classList.remove("hidden");
-            detail.setAttribute("aria-hidden", "false");
+            // Collapse all panels
+            panels.forEach(pw => {
+                if (pw.classList.contains("expanded")) {
+                    const textDiv = pw.querySelector(".service-text");
+                    if (textDiv) textDiv.remove();
+                    pw.classList.remove("expanded");
+                    pw.querySelector(".service-panel").setAttribute("aria-expanded", "false");
+                }
+            });
 
-            panel.setAttribute("aria-expanded", "true");
+            if (!isExpanded) {
+                // Expand clicked panel
+                panelWrapper.classList.add("expanded");
+                const service = services[panel.dataset.service];
+
+                // Create text element
+                const detailDiv = document.createElement("div");
+                detailDiv.classList.add("service-text");
+                detailDiv.innerHTML = `
+                    <h3>${service.title}</h3>
+                    <p>${service.description}</p>
+                `;
+                panelWrapper.appendChild(detailDiv);
+
+                panel.setAttribute("aria-expanded", "true");
+
+                // Scroll expanded panel to top of viewport smoothly
+                panelWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+                // If collapsing, scroll back to top of this panel
+                const headerOffset = 20; // optional padding above panel
+                const panelTop = panelWrapper.getBoundingClientRect().top + window.scrollY - headerOffset;
+                window.scrollTo({ top: panelTop, behavior: "smooth" });
+            }
         });
     });
 
-    document.getElementById("backToServices").addEventListener("click", () => {
-        detail.classList.add("hidden");
-        grid.style.display = "grid";
-        detail.setAttribute("aria-hidden", "true");
+    // Reset image heights on window resize if not expanded
+    window.addEventListener("resize", () => {
+        panels.forEach(pw => {
+            if (!pw.classList.contains("expanded")) {
+                const img = pw.querySelector("img");
+                img.style.height = "";
+            }
+        });
     });
 
     /* ================== GALLERY LIGHTBOX ================== */

@@ -72,69 +72,67 @@
             <h1>Morgan's Tree Service</h1>
             <p>Professional Arborist based in Polstead, Suffolk</p>
             <div class="cta-buttons">
-                <a href="tel:+441234567890" class="call-button">Call Now: 01234 567890</a>
-                <a href="mailto:info@morganstreeservice.co.uk" class="call-button">Email Now:
-                    info@morganstreeservice.co.uk</a>
+                <a href="tel:0123456789" class="call-button">
+                    <span class="icon phone-icon"></span>
+                    Call Now
+                </a>
+                <a href="mailto:info@example.com" class="call-button">
+                    <span class="icon email-icon"></span>
+                    Email Now
+                </a>
             </div>
+
         </div>
     </header>
 
-
-
-
     <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>Providing professional tree services across Essex and Suffolk.</p>
-            <p>Fully qualified, trained arborist with over 25 years of experience.</p>
-            <p>All aspects of tree work undertaken safely and professionally.</p>
-
-        </div>
+    <section id="about" id="about">
+        <h2>About Us</h2>
+        <p>Providing professional tree services across Essex and Suffolk.</p>
+        <p>Fully qualified, trained arborist with over 25 years of experience.</p>
+        <p>All aspects of tree work undertaken safely and professionally.</p>
     </section>
 
+    <!-- Services Section -->
     <section id="services" class="section light">
         <div class="container">
             <h2>Our Services</h2>
 
-            <!-- Services Grid -->
             <div class="services-grid" id="servicesGrid">
-                <button class="service-panel" data-service="reduction" aria-expanded="false">
-                    <img src="images/tree1.jpg" alt="Tree reduction">
-                    <span>Reduction / Pruning</span>
-                </button>
+                <div class="service-panel-wrapper">
+                    <button class="service-panel" data-service="reduction" aria-expanded="false">
+                        <img src="images/tree1.jpg" alt="Tree reduction">
+                        <span>Reduction / Pruning</span>
+                    </button>
+                </div>
 
-                <button class="service-panel" data-service="removal" aria-expanded="false">
-                    <img src="images/tree2.jpg" alt="Tree removal">
-                    <span>Tree Removals</span>
-                </button>
+                <div class="service-panel-wrapper">
+                    <button class="service-panel" data-service="removal" aria-expanded="false">
+                        <img src="images/tree2.jpg" alt="Tree removal">
+                        <span>Tree Removals</span>
+                    </button>
+                </div>
 
-                <button class="service-panel" data-service="lifting" aria-expanded="false">
-                    <img src="images/tree3.jpg" alt="Tree lifting">
-                    <span>Crown Lifting</span>
-                </button>
+                <div class="service-panel-wrapper">
+                    <button class="service-panel" data-service="lifting" aria-expanded="false">
+                        <img src="images/tree3.jpg" alt="Tree lifting">
+                        <span>Crown Lifting</span>
+                    </button>
+                </div>
 
-                <button class="service-panel" data-service="hedges" aria-expanded="false">
-                    <img src="images/tree1.jpg" alt="Hedge trimming">
-                    <span>Hedge Trimming</span>
-                </button>
+                <div class="service-panel-wrapper">
+                    <button class="service-panel" data-service="hedges" aria-expanded="false">
+                        <img src="images/tree1.jpg" alt="Hedge trimming">
+                        <span>Hedge Trimming</span>
+                    </button>
+                </div>
 
-                <button class="service-panel" data-service="clearance" aria-expanded="false">
-                    <img src="images/tree2.jpg" alt="Garden clearance">
-                    <span>Garden Clearance</span>
-                </button>
-            </div>
-
-            <!-- Service Detail View -->
-            <div class="service-detail hidden" id="serviceDetail" aria-hidden="true">
-                <button class="back-button" id="backToServices">← Back to services</button>
-                <article class="service-detail-content">
-                    <img id="detailImage" src="" alt="">
-                    <div class="service-text">
-                        <h3 id="detailTitle"></h3>
-                        <p id="detailDescription"></p>
-                    </div>
-                </article>
+                <div class="service-panel-wrapper">
+                    <button class="service-panel" data-service="clearance" aria-expanded="false">
+                        <img src="images/tree2.jpg" alt="Garden clearance">
+                        <span>Garden Clearance</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -170,12 +168,10 @@
     <!-- Testimonials Section -->
     <section id="testimonials" class="section">
         <div class="container">
-            <h2>Client Testimonials</h2>
+            <h2>Testimonials</h2>
 
-            <!-- Commercial Testimonials -->
-            <div class="testimonial-group">
-                <h3>Commercial Testimonials</h3>
-
+            <!-- Wrap testimonial items in their own grid container -->
+            <div class="testimonials-grid">
                 <div class="testimonial">
                     <blockquote>
                         "Luke Morgan has carried out tree felling, pruning,
@@ -183,27 +179,31 @@
                         and has always demonstrated excellent technical ability and sound judgement on site.
                         He is consistently reliable, hardworking and professional,
                         and we would not hesitate to recommend him."
-                        <cite>— John Fulcher, Director (Silvicultural Systems)</cite>
                     </blockquote>
+                    <cite>John Fulcher, Director (Silvicultural Systems)</cite>
                 </div>
-            </div>
-
-            <!-- Domestic Testimonials -->
-            <div class="testimonial-group">
-                <h3>Domestic Testimonials</h3>
 
                 <div class="testimonial">
                     <blockquote>
-                        "Great service from start to finish. The work was carried out safely,
-                        everything was left tidy, and the price was very fair.
-                        Would definitely recommend."
-                        <cite>— Local Customer, Polstead</cite>
+                        "I have had several jobs completed by Morgan’s Tree Services and have always been very pleased
+                        with the results. Luke is professional, reasonably priced, and works to a very high standard,
+                        always leaving the area clean and tidy. I’ve recommended the company to family members who have
+                        also been extremely impressed. Highly recommended."
                     </blockquote>
+                    <cite>Sam Brown, Halstead</cite>
                 </div>
 
+                <div class="testimonial">
+                    <blockquote>
+                        "Luke did a large amount of work on the trees in our garden. We found him to be professional,
+                        incredibly competitively priced, conscientious and very pleasant to work with."
+                    </blockquote>
+                    <cite>Emma Gallop, West Bergholt</cite>
+                </div>
             </div>
         </div>
     </section>
+
 
 
     <!-- Contact Section -->
@@ -211,9 +211,7 @@
         <div class="container">
             <h2>Contact Us</h2>
             <address>
-                Morgan's Tree Service<br>
-                Polstead, Suffolk<br>
-                UK
+                Morgan's Tree Service, Polstead, Suffolk, UK
             </address>
             <p> <a href="tel:+441234567890">01234 567890</a></p>
             <p> <a href="mailto:hello@morganstreeservice.co.uk">hello@morganstreeservice.co.uk</a></p>
