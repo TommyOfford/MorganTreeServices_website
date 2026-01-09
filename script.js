@@ -1,13 +1,15 @@
 /*
-   File: script.js
-   Author: Thomas Morgan Offord
-   Updated: 2026-01-07
-   Description: Handles interactive services section and gallery lightbox
-   for Morgan Tree Services.
-*/
+ * File: script.js
+ * Project: Morgan Tree Services
+ * Author: Thomas Morgan Offord
+ * Last updated: 2026-01-09
+ * Purpose: UI interactivity for Services panels and Gallery lightbox.
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
-    /* ================== SERVICES SECTION ================== */
+    /* =========================
+         Services — expand/collapse panels
+         ========================= */
     const services = {
         reduction: {
             title: "Reduction / Pruning",
@@ -86,7 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* ================== GALLERY LIGHTBOX ================== */
+    /* =========================
+        Gallery lightbox — click to open; zoom/pan (desktop) and pinch-to-zoom (mobile)
+        ========================= */
     const galleryImages = document.querySelectorAll(".gallery img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
