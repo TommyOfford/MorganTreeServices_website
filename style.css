@@ -384,7 +384,7 @@ h4 {
    SERVICES SECTION (MOBILE-FIRST)
    ========================= */
 
-/* Base: Mobile */
+/* Base: Mobile (0–599px) */
 #services {
     padding: 2rem 1rem;
     text-align: center;
@@ -420,30 +420,44 @@ h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .service-panel img {
     width: 100%;
-    height: 200px;
-    border-radius: 10px;
+    height: 250px;
+    /* taller default card */
     object-fit: cover;
+    border-radius: 10px;
     transition: all 0.3s ease;
 }
 
 .service-panel span {
-    display: block;
-    margin-top: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
     font-weight: bold;
     font-size: clamp(1.2rem, 2vw, 1.6rem);
-    color: #ffffff;
     line-height: 1.3;
+    color: #ffffff;
+    background: var(--brand-green);
+    border-radius: 5px;
+    text-align: center;
+    pointer-events: none;
+    width: auto;
 }
 
 /* Expanded panel */
 .service-panel-wrapper.expanded .service-panel img {
     width: 100%;
     height: auto;
-    max-height: 500px;
+    /* allow natural image height */
+    max-height: 650px;
+    /* taller expanded image */
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -452,12 +466,10 @@ h4 {
     margin-top: 0.75rem;
 }
 
-/* Make expanded panel span full width and push other panels down */
 .service-panel-wrapper.expanded {
     grid-column: 1 / -1;
 }
 
-/* Service detail text inside expanded panel */
 .service-panel-wrapper .service-text {
     width: 100%;
     margin-top: 1rem;
@@ -476,7 +488,14 @@ h4 {
     line-height: 1.5;
 }
 
-/* Responsive columns */
+@media (hover: hover) and (pointer: fine) {
+    .service-panel:hover img {
+        transform: scale(1.03);
+        transition: transform 0.3s ease;
+    }
+}
+
+/* Small Tablet (600–767px) */
 @media (min-width: 600px) {
     .services-grid {
         grid-template-columns: repeat(2, 48%);
@@ -484,14 +503,17 @@ h4 {
     }
 
     .service-panel img {
-        height: 200px;
+        height: 280px;
+        /* taller overview card */
     }
 
     .service-panel-wrapper.expanded .service-panel img {
-        max-height: 450px;
+        max-height: 600px;
+        height: auto;
     }
 }
 
+/* Large Tablet (768–1023px) */
 @media (min-width: 768px) {
     .services-grid {
         grid-template-columns: repeat(2, 48%);
@@ -499,14 +521,35 @@ h4 {
     }
 
     .service-panel img {
-        height: 240px;
+        height: 320px;
+        /* taller overview card */
     }
 
     .service-panel-wrapper.expanded .service-panel img {
-        max-height: 500px;
+        max-height: 650px;
+        height: auto;
     }
 }
 
+/* Desktop (1024–1279px) */
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 31%);
+        gap: 1rem;
+    }
+
+    .service-panel img {
+        height: 360px;
+        /* taller overview card */
+    }
+
+    .service-panel-wrapper.expanded .service-panel img {
+        max-height: 700px;
+        height: auto;
+    }
+}
+
+/* Large Desktop (1280px+) */
 @media (min-width: 1280px) {
     .services-grid {
         grid-template-columns: repeat(3, 31%);
@@ -514,11 +557,13 @@ h4 {
     }
 
     .service-panel img {
-        height: 280px;
+        height: 400px;
+        /* tallest overview card */
     }
 
     .service-panel-wrapper.expanded .service-panel img {
-        max-height: 550px;
+        max-height: 750px;
+        height: auto;
     }
 }
 
@@ -538,10 +583,12 @@ h4 {
     margin-bottom: 1.5rem;
 }
 
+/* Gallery grid */
 .gallery {
     display: grid;
     grid-template-columns: 100%;
     gap: 1rem;
+    justify-content: center;
 }
 
 .gallery figure {
@@ -550,7 +597,7 @@ h4 {
 
 .gallery img {
     width: 100%;
-    height: 200px;
+    height: auto;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
@@ -569,95 +616,250 @@ h4 {
     color: #ffffff;
 }
 
-/* -------------------------
-   Small Tablet (600–767px) — 2 columns
-   ------------------------- */
-@media (min-width: 600px) {
+/* =========================
+   GALLERY SET CARD (OVERVIEW)
+   ========================= */
+
+.gallery-set-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+}
+
+.gallery-set-card {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+
+.gallery-set-card img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    height: 300px;
+    /* taller overview cards */
+}
+
+.gallery-set-card:hover img {
+    transform: scale(1.03);
+}
+
+.gallery-set-title {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.25rem 0.75rem;
+    font-weight: bold;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1.3;
+    color: #ffffff;
+    background: var(--brand-green);
+    border-radius: 5px;
+    text-align: center;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* =========================
+   EXPANDED GALLERY SET
+   ========================= */
+
+.gallery-set {
+    margin-bottom: 3rem;
+}
+
+.gallery-set h3 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    color: var(--brand-green);
+    text-align: center;
+}
+
+.gallery-set-content {
+    display: none;
+    margin: 2rem auto 3rem;
+    width: 100%;
+}
+
+.gallery-set-content.active {
+    display: block;
+}
+
+.gallery-set-box {
+    position: relative;
+    border: 2px solid rgba(74, 140, 69, 0.6);
+    border-radius: 14px;
+    padding: 1.5rem;
+    background: #0b0b0b;
+    display: block;
+
+    width: 90vw;
+    /* nearly full screen */
+    max-width: none;
+    /* ignore container limit */
+    margin: 0 auto;
+    /* center horizontally */
+    left: 50%;
+    /* shift from left edge */
+    transform: translateX(-50%);
+    /* truly center on viewport */
+    box-sizing: border-box;
+}
+
+
+/* Images grid inside expanded set */
+.gallery-set-images {
+    display: grid;
+    grid-auto-flow: row;
+    /* stack vertically by default */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.gallery-set-images img {
+    width: 100%;
+    height: 300px;
+    /* taller images */
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+
+.gallery-set-description {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #eaeaea;
+    text-align: center;
+}
+
+.gallery-set-back {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 10;
+}
+
+.gallery-set-back:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* =========================
+   MEDIA QUERIES
+   ========================= */
+
+/* Mobile (0–599px) */
+@media (max-width: 599px) {
+    .gallery-set-images {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-set-images img {
+        height: 250px;
+        /* slightly taller on small mobile */
+    }
+
+    .gallery-set-box {
+        padding: 1rem;
+    }
+}
+
+/* Small Tablet (600–767px) */
+@media (min-width: 600px) and (max-width: 767px) {
     .gallery {
         grid-template-columns: repeat(2, 48%);
         gap: 1rem;
         justify-content: center;
     }
 
-    .gallery img {
-        height: 220px;
+    .gallery-set-card img {
+        height: 300px;
+    }
+
+    .gallery-set-images img {
+        height: 300px;
     }
 }
 
-/* -------------------------
-   Large Tablet (768–1023px) — 3 columns
-   ------------------------- */
-@media (min-width: 768px) {
+/* Large Tablet (768–1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
     .gallery {
         grid-template-columns: repeat(3, 31%);
-        gap: 1rem;
-        justify-content: center;
     }
 
-    .gallery img {
-        height: 240px;
+    .gallery-set-card img {
+        height: 320px;
+    }
+
+    .gallery-set-images {
+        grid-template-columns: 1fr;
+        /* still stack vertically */
+        grid-auto-flow: row;
+    }
+
+    .gallery-set-images img {
+        height: 320px;
+    }
+
+    .gallery-set {
+        margin-bottom: 4rem;
     }
 }
 
-/* -------------------------
-   Desktop (1024px+) — 4 columns
-   ------------------------- */
+/* Desktop (1024px+) - Dynamic layout */
+@media (min-width: 1024px) {
+    .gallery-set-card img {
+        height: 340px;
+    }
+
+    .gallery-set-images {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        /* dynamic: will create as many columns as fit */
+        grid-auto-flow: row;
+        gap: 1rem;
+    }
+
+    .gallery-set-images img {
+        height: 340px;
+    }
+}
+
+/* Large Desktop (1280px+) */
 @media (min-width: 1280px) {
     .gallery {
         grid-template-columns: repeat(4, 22%);
-        gap: 1rem;
-        justify-content: center;
-    }
-
-    .gallery img {
-        height: 260px;
     }
 
     #gallery .container {
         max-width: 1400px;
         margin: 0 auto;
     }
-}
 
-/* -------------------------
-   Lightbox
-   ------------------------- */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.lightbox.hidden {
-    display: none;
-}
-
-.lightbox-content {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox img {
-    width: 80vw;
-    height: auto;
-    object-fit: contain;
-    border-radius: 10px;
-    cursor: zoom-in;
-    transition: transform 0.2s ease;
-}
-
-.lightbox img.zoomed {
-    cursor: grab;
-}
-
-.lightbox img.dragging {
-    cursor: grabbing;
-    transition: none;
+    .gallery-set-images img {
+        height: 360px;
+    }
 }
 
 /* =========================

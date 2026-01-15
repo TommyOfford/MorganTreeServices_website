@@ -70,7 +70,7 @@
         <img src="images/logo.png" alt="Morgan Tree Services Logo" class="hero-logo">
         <div class="hero-text">
             <h1>Morgan Tree Services</h1>
-            <p>Professional Arborist based in Polstead, Suffolk</p>
+            <p>Professional Arborists based in Polstead, Suffolk</p>
             <div class="cta-buttons">
                 <a href="tel:+441234567890" class="call-button">
                     <span class="icon phone-icon"></span>
@@ -89,7 +89,7 @@
     <section id="about">
         <h2>About Us</h2>
         <p>Providing professional tree services across Essex and Suffolk.</p>
-        <p>Fully qualified, trained arborist with over 25 years of experience.</p>
+        <p>Fully qualified, trained arborists with over 25 years of experience.</p>
         <p>All aspects of tree work undertaken safely and professionally.</p>
     </section>
 
@@ -101,36 +101,43 @@
             <div class="services-grid" id="servicesGrid">
                 <div class="service-panel-wrapper">
                     <button class="service-panel" data-service="reduction" aria-expanded="false">
-                        <img src="images/tree1.jpg" alt="Tree reduction">
+                        <img src="images/Reduction_1_2.jpeg" alt="Tree reduction">
                         <span>Reduction / Pruning</span>
                     </button>
                 </div>
 
                 <div class="service-panel-wrapper">
                     <button class="service-panel" data-service="removal" aria-expanded="false">
-                        <img src="images/tree2.jpg" alt="Tree removal">
-                        <span>Tree Removals</span>
+                        <img src="images/Removal.jpeg" alt="Tree removal">
+                        <span>Tree Felling / Removal</span>
                     </button>
                 </div>
 
                 <div class="service-panel-wrapper">
                     <button class="service-panel" data-service="lifting" aria-expanded="false">
-                        <img src="images/tree3.jpg" alt="Tree lifting">
+                        <img src="images/Lift_1_1.jpeg" alt="Tree lifting">
                         <span>Crown Lifting</span>
                     </button>
                 </div>
 
                 <div class="service-panel-wrapper">
                     <button class="service-panel" data-service="hedges" aria-expanded="false">
-                        <img src="images/tree1.jpg" alt="Hedge trimming">
+                        <img src="images/Hedgecutting_2.jpeg" alt="Hedge trimming">
                         <span>Hedge Trimming</span>
                     </button>
                 </div>
 
                 <div class="service-panel-wrapper">
                     <button class="service-panel" data-service="clearance" aria-expanded="false">
-                        <img src="images/tree2.jpg" alt="Garden clearance">
+                        <img src="images/Clerance.jpeg" alt="Garden clearance">
                         <span>Garden Clearance</span>
+                    </button>
+                </div>
+
+                <div class="service-panel-wrapper">
+                    <button class="service-panel" data-service="carving" aria-expanded="false">
+                        <img src="images/Carvings.png" alt="Bespoke wood carving">
+                        <span>Bespoke Wood Carving</span>
                     </button>
                 </div>
             </div>
@@ -141,22 +148,67 @@
     <section id="gallery" class="section">
         <div class="container">
             <h2>Our Work</h2>
-            <div class="gallery">
-                <figure>
-                    <img src="images/tree1.jpg" alt="Tree removal before and after">
-                    <figcaption>Tree removal before and after</figcaption>
-                </figure>
-                <figure>
-                    <img src="images/tree2.jpg" alt="Hedge trimming completed">
-                    <figcaption>Hedge trimming completed</figcaption>
-                </figure>
-                <figure>
-                    <img src="images/tree3.jpg" alt="Garden clearance project">
-                    <figcaption>Garden clearance project</figcaption>
-                </figure>
+
+            <!-- =========================
+                OVERVIEW CARDS
+                ========================= -->
+
+            <div class="gallery-set-grid">
+                <div class="gallery-set-card" data-set="reduction-1">
+                    <img src="images/Reduction_1_1.jpeg" alt="Reduction 1 overview">
+                    <span class="gallery-set-title">English Oak Reduction</span>
+                </div>
+
+                <div class="gallery-set-card" data-set="reduction-3">
+                    <img src="images/Reduction_3_1.jpeg" alt="Silver Birch Reduction overview">
+                    <span class="gallery-set-title">Silver Birch Reduction</span>
+                </div>
             </div>
+
+
+            <!-- =========================
+                EXPANDED CONTENT — SET 1
+                ========================= -->
+
+            <div class="gallery-set-content" id="reduction-1">
+                <div class="gallery-set-box">
+                    <button class="gallery-set-back" aria-label="Close">×</button>
+
+                    <div class="gallery-set-images">
+                        <img src="images/Reduction_1_1.jpeg" alt="English Oak before reduction">
+                        <img src="images/Reduction_1_2.jpeg" alt="English Oak mid reduction">
+                        <img src="images/Reduction_1_3.jpeg" alt="English Oak after reduction">
+                    </div>
+
+                    <p class="gallery-set-description">
+                        Reduction and thin on a beautiful old English Oak (Quercus robur). Restricting
+                        growth over a building and allowing wind and light to pass through the canopy.
+                    </p>
+                </div>
+            </div>
+
+            <!-- =========================
+                EXPANDED CONTENT — SET 2
+                ========================= -->
+
+            <div class="gallery-set-content" id="reduction-3">
+                <div class="gallery-set-box">
+                    <button class="gallery-set-back" aria-label="Close">×</button>
+
+                    <div class="gallery-set-images">
+                        <img src="images/Reduction_3_1.jpeg" alt="Silver Birch pruning work">
+                        <img src="images/Reduction_3_2.jpeg" alt="Silver Birch after pruning">
+                    </div>
+
+                    <p class="gallery-set-description">
+                        A group of 6 Silver Birch (Betula pendula) pruned for uniformity.
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
+
 
     <!-- Lightbox -->
     <div class="lightbox hidden" id="lightbox">
@@ -174,11 +226,11 @@
             <div class="testimonials-grid">
                 <div class="testimonial">
                     <blockquote>
-                        "Luke Morgan has carried out tree felling, pruning,
+                        "Morgan Tree Services have carried out tree felling, pruning,
                         and wider tree surgery work for Silvicultural Systems over several years,
-                        and has always demonstrated excellent technical ability and sound judgement on site.
-                        He is consistently reliable, hardworking and professional,
-                        and we would not hesitate to recommend him."
+                        and have always demonstrated excellent technical ability and sound judgement on site.
+                        They are consistently reliable, hardworking and professional,
+                        and we would not hesitate to recommend them."
                     </blockquote>
                     <cite>John Fulcher, Director (Silvicultural Systems)</cite>
                 </div>

@@ -13,24 +13,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const services = {
         reduction: {
             title: "Reduction / Pruning",
-            description: "Careful pruning and crown reduction to maintain tree health, safety, and appearance."
+            description: "Careful pruning and crown reduction to maintain safety, and appearance."
         },
         removal: {
-            title: "Tree Removals",
+            title: "Tree Felling / Removal",
             description: "Safe and controlled removal of trees, including difficult or restricted-access locations."
         },
         lifting: {
             title: "Crown Lifting",
-            description: "Raising the canopy to improve access, light, and clearance around property."
+            description: "Raising the canopy to improve light and clearance or to allow access."
         },
         hedges: {
             title: "Hedge Trimming",
-            description: "Regular and one-off hedge maintenance to keep gardens tidy and healthy."
+            description: "Regular and one-off hedge maintenance for shape and aesthetic appeal."
         },
         clearance: {
             title: "Garden Clearance",
             description: "Full garden and site clearance, including green waste removal."
+        },
+        carving: {
+            title: "Bespoke Wood Carving",
+            description: "When the sad decision is made to remove your tree, why not leave behind a tree spirit to continue it's legacy?\n Talk to us about bespoke carving"
         }
+
     };
 
     const panels = document.querySelectorAll(".service-panel-wrapper");
@@ -91,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================
         Gallery lightbox — click to open; zoom/pan (desktop) and pinch-to-zoom (mobile)
         ========================= */
-    const galleryImages = document.querySelectorAll(".gallery img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
 
@@ -110,23 +114,26 @@ document.addEventListener("DOMContentLoaded", () => {
     let initialDistance = 0;
     let initialScale = 2;
 
-    // ---------- OPEN LIGHTBOX ----------
-    galleryImages.forEach(img => {
-        img.addEventListener("click", () => {
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
-            lightbox.classList.remove("hidden");
+    // ---------- OPEN LIGHTBOX (DELEGATED) ----------
+    document.addEventListener("click", (e) => {
+        const img = e.target.closest(".gallery img, .gallery-set-images img");
+        if (!img) return;
 
-            // Reset all states
-            currentX = 0;
-            currentY = 0;
-            zoomed = false;
-            wasDragging = false;
-            pinchZooming = false;
-            initialDistance = 0;
-            lightboxImg.style.transform = "";
-            lightboxImg.style.cursor = isMobile ? "default" : "zoom-in";
-        });
+        e.stopPropagation();
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.remove("hidden");
+
+        // Reset all states
+        currentX = 0;
+        currentY = 0;
+        zoomed = false;
+        wasDragging = false;
+        pinchZooming = false;
+        initialDistance = 0;
+        lightboxImg.style.transform = "";
+        lightboxImg.style.cursor = isMobile ? "default" : "zoom-in";
     });
 
     // Click outside image closes lightbox
@@ -251,4 +258,54 @@ document.addEventListener("DOMContentLoaded", () => {
         lightboxImg.style.transform = "";
         lightboxImg.style.cursor = isMobile ? "default" : "zoom-in";
     }
+    /* =========================
+    GALLERY CASE TOGGLE
+    ========================= */
+
+    const galleryTriggers = document.querySelectorAll(".gallery-set-trigger");
+    const galleryOverview = document.getElementById("galleryOverview");
+    const galleryExpanded = document.querySelectorAll(".gallery-expanded");
+
+    galleryTriggers.forEach(trigger => {
+        trigger.addEventListener("click", () => {
+            const targetId = trigger.dataset.set;
+            const target = document.getElementById(targetId);
+
+            galleryOverview.classList.add("hidden");
+            target.classList.remove("hidden");
+
+            // Scroll cleanly to top of section
+            document.getElementById("gallery")
+                .scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    });
+
+    document.querySelectorAll(".gallery-set-card").forEach(card => {
+        card.addEventListener("click", () => {
+            const id = card.dataset.set;
+            const content = document.getElementById(id);
+
+            // Hide all cards & contents
+            document.querySelectorAll(".gallery-set-card").forEach(c => c.style.display = "none");
+            document.querySelectorAll(".gallery-set-content").forEach(c => c.classList.remove("active"));
+
+            // Show selected
+            content.classList.add("active");
+
+            // Scroll cleanly
+            content.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    });
+
+    document.querySelectorAll(".gallery-set-back").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".gallery-set-content").forEach(c => c.classList.remove("active"));
+            document.querySelectorAll(".gallery-set-card").forEach(c => c.style.display = "");
+
+            document.getElementById("gallery").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        });
+    });
 });
