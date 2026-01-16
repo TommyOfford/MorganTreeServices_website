@@ -5,11 +5,11 @@
  * Last updated: 2026-01-09
  * Purpose: UI interactivity for Services panels and Gallery lightbox.
  */
-
 document.addEventListener("DOMContentLoaded", () => {
+
     /* =========================
-         Services — expand/collapse panels
-         ========================= */
+       Services — expand/collapse panels
+       ========================= */
     const services = {
         reduction: {
             title: "Reduction / Pruning",
@@ -33,16 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         carving: {
             title: "Bespoke Wood Carving",
-            description: "When the sad decision is made to remove your tree, why not leave behind a tree spirit to continue it's legacy?\n Talk to us about bespoke carving"
+            description: "When the sad decision is made to remove your tree, why not leave behind a tree spirit to continue it's legacy?\n Talk to us about bespoke carving."
         }
-
     };
 
     const panels = document.querySelectorAll(".service-panel-wrapper");
 
     panels.forEach(panelWrapper => {
         const panel = panelWrapper.querySelector(".service-panel");
-
         panel.addEventListener("click", () => {
             const isExpanded = panelWrapper.classList.contains("expanded");
 
@@ -64,12 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Create text element
                 const detailDiv = document.createElement("div");
                 detailDiv.classList.add("service-text");
-                detailDiv.innerHTML = `
-                    <h3>${service.title}</h3>
-                    <p>${service.description}</p>
-                `;
+                detailDiv.innerHTML = `<h3>${service.title}</h3>
+<p>${service.description}</p>`;
                 panelWrapper.appendChild(detailDiv);
-
                 panel.setAttribute("aria-expanded", "true");
 
                 // Scroll expanded panel to top of viewport smoothly
@@ -94,17 +89,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* =========================
-        Gallery lightbox — click to open; zoom/pan (desktop) and pinch-to-zoom (mobile)
-        ========================= */
+       GALLERY LIGHTBOX
+       ========================= */
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxPrev = document.querySelector(".lightbox-prev");
+    const lightboxNext = document.querySelector(".lightbox-next");
+    const lightboxClose = document.querySelector(".lightbox-close");
 
     if (!lightbox || !lightboxImg) return;
 
-    // Detect if mobile
     const isMobile = 'ontouchstart' in window;
 
-    // State variables
+    // State
     let isDragging = false;
     let startX, startY;
     let currentX = 0, currentY = 0;
@@ -114,60 +111,122 @@ document.addEventListener("DOMContentLoaded", () => {
     let initialDistance = 0;
     let initialScale = 2;
 
-    // ---------- OPEN LIGHTBOX (DELEGATED) ----------
-    document.addEventListener("click", (e) => {
-        const img = e.target.closest(".gallery img, .gallery-set-images img");
-        if (!img) return;
+    // Navigation state
+    let currentSetImages = [];
+    let currentImageIndex = 0;
 
+    /* ---------- OPEN LIGHTBOX (ONLY FROM SET IMAGES) ---------- */
+    document.addEventListener("click", (e) => {
+        const img = e.target.closest(".gallery-set-images img");
+        if (!img) return;
+        e.preventDefault();
         e.stopPropagation();
 
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.classList.remove("hidden");
+        // Find all images in the current set
+        const setContainer = img.closest(".gallery-set-content");
+        currentSetImages = Array.from(setContainer.querySelectorAll(".gallery-set-images img"));
+        currentImageIndex = currentSetImages.indexOf(img);
 
-        // Reset all states
+        // Update lightbox with current image
+        updateLightboxImage();
+        lightbox.classList.remove("hidden");
         currentX = 0;
         currentY = 0;
         zoomed = false;
         wasDragging = false;
         pinchZooming = false;
-        initialDistance = 0;
         lightboxImg.style.transform = "";
         lightboxImg.style.cursor = isMobile ? "default" : "zoom-in";
+
+        // Update button visibility
+        updateNavigationButtons();
     });
 
-    // Click outside image closes lightbox
+    /* ---------- CLOSE LIGHTBOX ---------- */
+    function closeLightbox() {
+        lightbox.classList.add("hidden");
+        lightboxImg.src = "";
+        zoomed = false;
+        currentX = 0;
+        currentY = 0;
+        wasDragging = false;
+        pinchZooming = false;
+        initialDistance = 0;
+        lightboxImg.style.transform = "";
+        currentSetImages = [];
+        currentImageIndex = 0;
+    }
+
+    /* ---------- NAVIGATION FUNCTIONS ---------- */
+    function updateLightboxImage() {
+        if (currentSetImages.length === 0 || currentImageIndex < 0 || currentImageIndex >= currentSetImages.length) return;
+        const img = currentSetImages[currentImageIndex];
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+    }
+
+    function updateNavigationButtons() {
+        if (lightboxPrev && lightboxNext) {
+            lightboxPrev.style.display = currentSetImages.length > 1 ? "flex" : "none";
+            lightboxNext.style.display = currentSetImages.length > 1 ? "flex" : "none";
+        }
+    }
+
+    function showPrevImage() {
+        if (currentSetImages.length <= 1) return;
+        currentImageIndex = (currentImageIndex - 1 + currentSetImages.length) % currentSetImages.length;
+        updateLightboxImage();
+        resetZoomAndPosition();
+    }
+
+    function showNextImage() {
+        if (currentSetImages.length <= 1) return;
+        currentImageIndex = (currentImageIndex + 1) % currentSetImages.length;
+        updateLightboxImage();
+        resetZoomAndPosition();
+    }
+
+    function resetZoomAndPosition() {
+        zoomed = false;
+        currentX = 0;
+        currentY = 0;
+        lightboxImg.style.transform = "";
+        lightboxImg.style.cursor = isMobile ? "default" : "zoom-in";
+    }
+
     lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) closeLightbox();
     });
 
-    // ---------- DESKTOP: Click to zoom ----------
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") showPrevImage();
+        if (e.key === "ArrowRight") showNextImage();
+    });
+
+    /* ---------- BUTTON EVENT LISTENERS ---------- */
+    if (lightboxPrev) lightboxPrev.addEventListener("click", (e) => { e.stopPropagation(); showPrevImage(); });
+    if (lightboxNext) lightboxNext.addEventListener("click", (e) => { e.stopPropagation(); showNextImage(); });
+    if (lightboxClose) lightboxClose.addEventListener("click", (e) => { e.stopPropagation(); closeLightbox(); });
+
+    /* ---------- DESKTOP CLICK ZOOM ---------- */
     if (!isMobile) {
         lightboxImg.addEventListener("click", (e) => {
             e.stopPropagation();
-            if (wasDragging) {
-                wasDragging = false;
-                return;
-            }
-
+            if (wasDragging) { wasDragging = false; return; }
             const rect = lightboxImg.getBoundingClientRect();
             const x = ((e.clientX - rect.left) / rect.width) * 100;
             const y = ((e.clientY - rect.top) / rect.height) * 100;
-
             lightboxImg.style.transformOrigin = `${x}% ${y}%`;
             zoomed = !zoomed;
-
             currentX = 0;
             currentY = 0;
-            lightboxImg.style.transform = zoomed
-                ? `translate(0px, 0px) scale(2)`
-                : `translate(0px, 0px) scale(1)`;
-
+            lightboxImg.style.transform = zoomed ? `translate(0, 0) scale(2)` : `translate(0, 0) scale(1)`;
             lightboxImg.style.cursor = zoomed ? "grab" : "zoom-in";
         });
     }
 
-    // ---------- DRAGGING ----------
+    /* ---------- DRAGGING ---------- */
     function startDrag(e) {
         if (!zoomed || pinchZooming) return;
         e.preventDefault();
@@ -176,7 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
         isDragging = true;
         startX = clientX - currentX;
         startY = clientY - currentY;
-        lightboxImg.classList.add("dragging");
     }
 
     function onDrag(e) {
@@ -189,110 +247,52 @@ document.addEventListener("DOMContentLoaded", () => {
         lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${zoomed ? 2 : 1})`;
     }
 
-    function endDrag() {
-        if (!isDragging) return;
-        isDragging = false;
-        lightboxImg.classList.remove("dragging");
-        lightboxImg.style.cursor = zoomed && !isMobile ? "grab" : (isMobile ? "default" : "zoom-in");
-    }
+    function endDrag() { isDragging = false; }
 
-    // Mouse events
     lightboxImg.addEventListener("mousedown", startDrag);
     document.addEventListener("mousemove", onDrag);
     document.addEventListener("mouseup", endDrag);
-
-    // Touch drag events
     lightboxImg.addEventListener("touchstart", startDrag, { passive: false });
     document.addEventListener("touchmove", onDrag, { passive: false });
     document.addEventListener("touchend", endDrag);
 
-    // ---------- PINCH ZOOM (MOBILE ONLY) ----------
+    /* ---------- PINCH ZOOM (MOBILE) ---------- */
     function getDistance(touches) {
         const [t1, t2] = touches;
-        const dx = t2.clientX - t1.clientX;
-        const dy = t2.clientY - t1.clientY;
-        return Math.hypot(dx, dy);
+        return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
     }
 
     if (isMobile) {
         lightboxImg.addEventListener("touchstart", (e) => {
             if (e.touches.length === 2) {
                 pinchZooming = true;
-                e.preventDefault();
                 initialDistance = getDistance(e.touches);
-                const match = lightboxImg.style.transform.match(/scale\(([\d.]+)\)/);
-                initialScale = match ? parseFloat(match[1]) : 2;
+                initialScale = zoomed ? 2 : 1;
             }
         }, { passive: false });
 
         lightboxImg.addEventListener("touchmove", (e) => {
             if (!pinchZooming || e.touches.length !== 2) return;
             e.preventDefault();
-            const currentDistance = getDistance(e.touches);
-            let scale = (currentDistance / initialDistance) * initialScale;
-            scale = Math.max(1, Math.min(scale, 4)); // clamp zoom
-            lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+            const scale = Math.max(1, Math.min((getDistance(e.touches) / initialDistance) * initialScale, 4));
             zoomed = scale > 1;
-            lightboxImg.style.cursor = "default";
+            lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
         }, { passive: false });
 
-        lightboxImg.addEventListener("touchend", (e) => {
-            if (e.touches.length < 2) pinchZooming = false;
-        });
+        lightboxImg.addEventListener("touchend", () => { pinchZooming = false; });
     }
 
-    // ---------- CLOSE LIGHTBOX ----------
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeLightbox();
-    });
-
-    function closeLightbox() {
-        lightbox.classList.add("hidden");
-        lightboxImg.src = "";
-        zoomed = false;
-        currentX = 0;
-        currentY = 0;
-        wasDragging = false;
-        pinchZooming = false;
-        initialDistance = 0;
-        lightboxImg.style.transform = "";
-        lightboxImg.style.cursor = isMobile ? "default" : "zoom-in";
-    }
     /* =========================
-    GALLERY CASE TOGGLE
-    ========================= */
-
-    const galleryTriggers = document.querySelectorAll(".gallery-set-trigger");
-    const galleryOverview = document.getElementById("galleryOverview");
-    const galleryExpanded = document.querySelectorAll(".gallery-expanded");
-
-    galleryTriggers.forEach(trigger => {
-        trigger.addEventListener("click", () => {
-            const targetId = trigger.dataset.set;
-            const target = document.getElementById(targetId);
-
-            galleryOverview.classList.add("hidden");
-            target.classList.remove("hidden");
-
-            // Scroll cleanly to top of section
-            document.getElementById("gallery")
-                .scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-    });
-
+       GALLERY SET TOGGLE (NO LIGHTBOX INTERFERENCE)
+       ========================= */
     document.querySelectorAll(".gallery-set-card").forEach(card => {
-        card.addEventListener("click", () => {
+        card.addEventListener("click", (e) => {
+            e.stopPropagation(); // 🔑 prevent lightbox
             const id = card.dataset.set;
             const content = document.getElementById(id);
-
-            // Hide all cards & contents
             document.querySelectorAll(".gallery-set-card").forEach(c => c.style.display = "none");
             document.querySelectorAll(".gallery-set-content").forEach(c => c.classList.remove("active"));
-
-            // Show selected
             content.classList.add("active");
-
-            // Scroll cleanly
             content.scrollIntoView({ behavior: "smooth", block: "start" });
         });
     });
@@ -301,11 +301,8 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", () => {
             document.querySelectorAll(".gallery-set-content").forEach(c => c.classList.remove("active"));
             document.querySelectorAll(".gallery-set-card").forEach(c => c.style.display = "");
-
-            document.getElementById("gallery").scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+            document.getElementById("gallery").scrollIntoView({ behavior: "smooth", block: "start" });
         });
     });
+
 });
