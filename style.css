@@ -442,10 +442,9 @@ h2 {
 /* Service title overlay */
 .service-panel span {
     position: absolute;
-    bottom: 0;
+    bottom: 0.5rem;
     left: 50%;
     transform: translateX(-50%);
-    display: inline-block;
     padding: 0.25rem 0.75rem;
     font-weight: bold;
     font-size: clamp(1rem, 3vw, 2.2rem);
@@ -455,7 +454,7 @@ h2 {
     border-radius: 5px;
     text-align: center;
     pointer-events: none;
-    width: auto;
+    white-space: nowrap;
 }
 
 /* =========================
