@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         removal: {
             title: "Tree Felling / Removal",
-            description: "Safe and controlled removal of trees, technical dismantling using rigging and lowering techniques."
+            description: "Safe and controlled removal of trees and technical dismantling using rigging and lowering techniques."
         },
         lifting: {
             title: "Crown Lifting",
