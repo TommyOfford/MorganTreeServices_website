@@ -2,7 +2,7 @@
  * File: script.js
  * Project: Morgan Tree Services
  * Author: Thomas Morgan Offord
- * Last updated: 2026-01-09
+ * Last updated: 2026-01-17
  * Purpose: UI interactivity for Services panels and Gallery lightbox.
  */
 document.addEventListener("DOMContentLoaded", () => {
