@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const services = {
         reduction: {
             title: "Reduction / Pruning",
-            description: "Careful pruning and crown reduction to maintain safety, and appearance."
+            description: "Careful pruning and crown reduction including deadwood and thinning to maintain safety, and appearance."
         },
         removal: {
             title: "Tree Felling / Removal",
-            description: "Safe and controlled removal of trees, including difficult or restricted-access locations."
+            description: "Safe and controlled removal of trees, technical dismantling using rigging and lowering techniques."
         },
         lifting: {
             title: "Crown Lifting",
