@@ -58,7 +58,7 @@ If the project scope expanded, I would:
 - Add a lightweight CMS or backend for easier content updates
 - Implement image lazy-loading and further performance optimisation
 - Introduce automated testing for interactive components
-- Add form validation and optional server-side handling
+- Add an enquiry form for users
 
 ---
 
