@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         clearance: {
             title: "Garden Clearance",
-            description: "Full garden and site clearance, including green waste removal."
+            description: "Tame your overgrown jungle. <br> Full garden and site clearance, including green waste removal."
         },
         carving: {
             title: "Bespoke Wood Carving",
